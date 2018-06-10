@@ -1,0 +1,79 @@
+<header>
+    <nav class=" float-right">
+        <div id="navbarSupportedContent">
+
+            <ul class="nav navbar-navs navbar-right">
+                <li class="nav-item active">
+                    <a class="nav-link" ui-sref="dashboard" ui-active="active">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="cart" ui-active="active">Cart 
+                        <span class="badge" style="font-size: 13px">{{cartCount}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/login/logout" ui-active="active">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section id="productsDiv">
+
+    <div id="carDiv" ng-if="cartDetails">
+        <div class="cart-table border border-info pt-3 rounded clearfix col-sm-12 float-left">
+            <table class="table " tabindex="1" style="overflow: hidden; outline: none;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cartDiv in cartDetails">
+                        <td class="cart_product_img">
+                            <a href="#"><img class="img-responsive" style="max-width: 100px" src="images/bg-img/{{cartDiv.imageName}}" alt="Product"></a>
+                        </td>
+                        <td class="cart_product_desc">
+                            <h5>{{cartDiv.title}}</h5>
+                        </td>
+                        <td class="price">
+                            <span><i class="fa fa-{{cartDiv.pricing.currency}}"></i> {{cartDiv.pricing.price}}</span>
+                        </td>
+                        <td class="qty">
+                            <div class="qty-btn d-flex">
+                                <div class="quantity">
+                                    <input class="form-control" type="number" class="qty-text" id="qty3" step="1" min="1" max="{{cartDiv.quantity}}" name="quantity" value="{{cartDiv.cartQty ? cartDiv.cartQty : 1}}">
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="btn btn-danger" ng-click="delCartItem($index)"><i class="fa fa-trash"></i></span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Total</th>
+                        <th>{{cartTotal}}</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div ng-if="!cartDetails">
+        <img class='imgLoading img-responsive' src="images/loading.gif" style="margin:auto;display: block" />
+    </div>
+</section>
+
+<footer>
+    <div class="footer">
+        All rights received.. @2018
+    </div>
+</footer>

@@ -1,0 +1,98 @@
+<header>
+    <nav class=" float-right">
+        <div id="navbarSupportedContent">
+
+            <ul class="nav navbar-navs navbar-right">
+                <li class="nav-item active">
+                    <a class="nav-link" ui-sref="dashboard" ui-active="active">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="cart" ui-active="active">Cart 
+                        <span class="badge" style="font-size: 13px">{{cartCount}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/login/logout" ui-active="active">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section id="productsDiv">
+    <div class="single-product-area section-padding-100 clearfix" ng-if="productDetails">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-50">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{productDetails.title}}</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-sm-5 float-left">
+            <div class="single_product_thumb">
+                <img class="img-responsive img-thumbnail" src="images/bg-img/{{productDetails.imageName}}" />
+            </div>
+        </div>
+        <div class="col-sm-7 float-left">
+            <div class="single_product_desc p-4 border border-warning rounded">
+                <!-- Product Meta Data -->
+                <div class="product-meta-data">
+                    <div class="line"></div>
+                    <h4 class="product-price">$ {{productDetails.pricing.price}}</h4>
+
+                    <h3><b>{{productDetails.title}}</b></h3>
+                    <!-- Ratings & Review -->
+                    <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                        <div class="ratings">
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                        </div>
+                        <div class="review">
+                            <a href="#" class="btn btn-primary">Write A Review</a>
+                        </div>
+                    </div>
+                    <!-- Avaiable -->
+                    <p class="avaibility" ng-if="productDetails.quantity <= 0"><i class="fa fa-circle text-danger"></i> Out of Stock</p>
+                    <p class="avaibility" ng-if="productDetails.quantity > 0"><i class="fa fa-circle text-success"></i> In Stock</p>
+                </div>
+
+                <div class="short_overview my-2" style="min-height: 130px">
+                    <p>{{productDetails.description}}</p>
+                </div>
+
+                <!-- Add to Cart Form -->
+                <form class="cart clearfix" method="post">
+                    <div class="cart-btn d-flex mb-50">
+
+                        <div class="quantity">
+                            <label class="control-label">Qty: </label>
+                            <!--<span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if (!isNaN(qty) & amp; & amp; qty > 1) effect.value--; return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>-->
+                            <input type="number" class="qty-text form-control" id="qty" step="1" min="1" ng-model="prodQty" max="{{productDetails.quantity}}" name="quantity" value="1">
+                            <!--                            <span class="qty-plus" onclick="var effect = document.getElementById('qty');
+                                                                var qty = effect.value;
+                                                                if (!isNaN(qty))
+                                                                    effect.value++;
+                                                                return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>-->
+                        </div>
+                    </div>
+                    <hr />
+                    <span ng-click="addToCart(productDetails)" class="btn btn-success amado-btn">Add to cart</span>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div ng-if="!productDetails">
+        <img class='imgLoading img-responsive' src="images/loading.gif" style="margin:auto;display: block" />
+    </div>
+</section>
+
+<footer>
+    <div class="footer">
+        All rights received.. @2018
+    </div>
+</footer>

@@ -1,0 +1,51 @@
+<header>
+    <nav class=" float-right">
+        <div id="navbarSupportedContent">
+
+            <ul class="nav navbar-navs navbar-right">
+                <li class="nav-item active">
+                    <a class="nav-link" ui-sref="dashboard" ui-active="active">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="cart" ui-active="active">Cart 
+                        <span class="badge" style="font-size: 13px">{{cartCount}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/login/logout" ui-active="active">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section id="productsDiv">
+
+    <div ng-if="!productsList">
+        <img class='imgloading img-responsive' src="images/loading.gif" style="margin:auto;display: block" />
+    </div>
+    <div class="products-catagories-area clearfix" ng-if="productsList">
+        <div class="amado-pro-catagory clearfix">
+
+            <!-- Single Catagory -->
+            <div class="single-products-catagory clearfix" ng-repeat="product in productsList">
+                <a href="#!/product/{{product.sku}}">
+                    <img src="images/bg-img/{{product.imageName}}" alt="">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>From <i class="fa fa-{{product.pricing.currency}}"></i> {{product.pricing.price}}</p>
+                        <h4>{{product.title}}</h4>
+                    </div>
+                </a>
+                <span class="addCart btn btn-primary" ng-click="addToCart(product);$event.stopPropagation();"><i class="fa fa-cart-plus"></i> Add Cart</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer">
+        All rights received.. @2018
+    </div>
+</footer>
